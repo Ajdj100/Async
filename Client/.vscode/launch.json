@@ -10,16 +10,31 @@
             "request": "launch",
             "mode": "debug",
             "program": "${workspaceFolder}",
-            "args": ["Canada.png"]
+            "args": [
+                "uploads\\Canada.png"
+            ]
         },
         {
-            "name" : "Hello World",
-            "type" : "go",
+            "name": "Hello World",
+            "type": "go",
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}",
             "env": {},
-            "args": ["hello.txt"]
+            "args": [
+                "uploads/hello.txt"
+            ]
+        },
+        {
+            "name": "Video",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+            "env": {},
+            "args": [
+                "uploads\\Tarkov Escape.mp4"
+            ]
         }
     ]
 }
