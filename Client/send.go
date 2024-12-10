@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type packet struct {
@@ -17,10 +18,13 @@ type packet struct {
 func main() {
 	var fileData packet
 
-	fileData.FileName = os.Args[1]
+	// fileData.FileName = os.Args[1]
+	fPath := os.Args[1]
+	nameStart := strings.LastIndex(fPath, "\\")
+	fileData.FileName = fPath[nameStart+1:]
 	fileData.Mode = 0
 
-	file, err := os.Open(fileData.FileName)
+	file, err := os.Open(fPath)
 
 	if err != nil {
 		log.Fatalln(err)

@@ -50,12 +50,14 @@ func openFile(incoming packet) *os.File {
 		fErr error
 	)
 
+	fullPath := "downloads/" + incoming.FileName
+
 	//evaluate file operation mode (create/append)
 	if incoming.Mode == 0 {
-		file, fErr = os.Create(incoming.FileName)
+		file, fErr = os.Create(fullPath)
 
 	} else {
-		file, fErr = os.OpenFile(incoming.FileName, os.O_APPEND, 0644)
+		file, fErr = os.OpenFile(fullPath, os.O_APPEND, 0644)
 	}
 	if fErr != nil {
 		fmt.Println(fErr)
