@@ -12,6 +12,7 @@ import (
 type packet struct {
 	FileName string
 	Mode     int
+	DevName  string
 	Data     []byte
 }
 
@@ -36,7 +37,7 @@ func postFile(c *gin.Context) {
 	file := openFile(incoming)
 
 	//write data to file
-	if _, err := file.Write([]byte(incoming.Data)); err != nil {
+	if _, err := file.Write(incoming.Data); err != nil {
 		panic(err)
 	}
 
@@ -50,8 +51,10 @@ func openFile(incoming packet) *os.File {
 		fErr error
 	)
 
-	fullPath := "downloads/" + incoming.FileName
+	fullPath := "downloads/" + incoming.DevName
+	os.MkdirAll(fullPath, os.ModePerm)
 
+	fullPath += "/" + incoming.FileName
 	//evaluate file operation mode (create/append)
 	if incoming.Mode == 0 {
 		file, fErr = os.Create(fullPath)
