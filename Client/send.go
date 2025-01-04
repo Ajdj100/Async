@@ -12,6 +12,7 @@ import (
 type packet struct {
 	FileName string
 	Mode     int
+	DevName  string
 	Data     []byte
 }
 
@@ -20,9 +21,18 @@ func main() {
 
 	// fileData.FileName = os.Args[1]
 	fPath := os.Args[1]
-	nameStart := strings.LastIndex(fPath, "\\")
+	nameStart := strings.LastIndex(fPath, "/")
 	fileData.FileName = fPath[nameStart+1:]
 	fileData.Mode = 0
+
+	device, err := os.Hostname()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fileData.DevName = device
+
+	log.Println(device)
 
 	file, err := os.Open(fPath)
 
